@@ -31,9 +31,7 @@ RUN curl -sLo ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-late
 RUN conda install -y -c pytorch \
     cudatoolkit=10.1 \
     torchvision \
+    flask \
+    pytest \
+    typing \
  && conda clean -ya
-
-#RUN pip install --upgrade \
-#    pytest \
-#    flask \
-#    pillow \

@@ -1,0 +1,11 @@
+version: "2"
+services:
+  bildeord:
+    image: bildeord/test:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+    ports:
+      - 5000:5000
