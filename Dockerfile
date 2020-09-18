@@ -13,9 +13,10 @@ RUN apt-get update && apt-get install -y \
     libx11-6 \
     && rm -rf /var/lib/apt/lists/*
 
-# Working directory
-RUN mkdir /app
+# Set work directory which commands will be run by default
 WORKDIR /app
+
+# TODO: copy requirements over
 
 ENV PATH=/root/miniconda/bin:$PATH
 
@@ -35,3 +36,6 @@ RUN conda install -y -c pytorch \
     pytest \
     typing \
  && conda clean -ya
+
+EXPOSE 5000
+# Entry point when the container starts

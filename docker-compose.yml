@@ -1,13 +1,12 @@
 version: '2'
 
 services:
-  object-detection:
+  # Service for vision object detection
+  detection:
     image: vision/detection:latest
-    build:
-      context: .
-      dockerfile: Dockerfile
-    working_dir: /app
     volumes:
       - ./app:/app
     ports:
-      - 5000:5000
+      - '5000:5000'
+    # Ensures container to be kept alive and does not exit.
+    tty: true
