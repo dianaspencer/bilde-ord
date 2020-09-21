@@ -1,4 +1,6 @@
 from flask import Flask
+from flask import jsonify
+from flask import request
 
 app = Flask(__name__)
 
@@ -8,9 +10,10 @@ def home():
     return "Hello world!"
 
 
-@app.route('/prediction')
-def object_detection():
-    pass
+@app.route("/annotate", methods=["POST"])
+def detection():
+    data = request.json
+    return jsonify(data)
 
 
 if __name__ == "__main__":

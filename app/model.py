@@ -12,7 +12,7 @@ else:
 
 # Load pre-trained model
 model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=True)
-# Set in eval mode
+# Set to eval mode
 model.eval()
 model.to(device)
 
