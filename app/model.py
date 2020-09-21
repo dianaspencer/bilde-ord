@@ -17,5 +17,5 @@ model.eval()
 model.to(device)
 
 
-def prediction(image):
-    return model([image])
+def prediction(img):
+    return model([img])
