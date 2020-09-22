@@ -1,11 +1,13 @@
 import logging
 import flask
+import os
 
 from flask import Flask
 
 app = Flask(__name__)
 # Confirm file extension is a valid image
 app.config['IMAGE_EXTENSIONS'] = ['.jpg', '.png', '.gif']
+app.config['UPLOAD_PATH'] = 'uploads'
 
 logging.basicConfig(level=logging.DEBUG)
 stdout = app.logger
@@ -22,16 +24,16 @@ def index():
 @app.route('/', methods=['POST'])
 def upload():
     unverified_data = flask.request.files['image']
-    # file_name, file_ext = unverified_data.filename.split('.')
-    # if len(file_name) == '' or file_ext not in app.config['IMAGE_EXTENSIONS']:
-    #    abort(400)
-    img = unverified_data.read()
+    # img = unverified_data.read()
+    filename = unverified_data.filename
+    unverified_data.save(os.path.join(app.config['UPLOAD_PATH'], filename))
     return flask.redirect(flask.url_for('index'))
 
 
-@app.route('/')
-def render():
-    pass
+@app.route('/uploads')
+def display():
+    filename = os.listdir(app.config['UPLOAD_PATH'])[0]
+    return flask.send_from_directory(app.config['UPLOAD_PATH'], filename)
 
 
 if __name__ == "__main__":
