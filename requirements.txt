@@ -2,4 +2,5 @@ cudatoolkit==10.1
 torchvision
 flask
 pytest
+setuptools
 typing
