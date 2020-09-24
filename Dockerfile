@@ -1,7 +1,3 @@
-# --
-# Credit to:
-# https://github.com/anibali/docker-pytorch/blob/master/dockerfiles/1.4.0-cuda9.2-ubuntu16.04/Dockerfile
-# --
 FROM nvidia/cuda:10.1-cudnn7-runtime-ubuntu16.04
 
 # Basic installs
@@ -13,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     libx11-6 \
     && rm -rf /var/lib/apt/lists/*
 
-# Set work directory which commands will be run by default
+# Assign work directory to set where commands will be run by default
 WORKDIR /app
 
 # TODO: copy requirements over
