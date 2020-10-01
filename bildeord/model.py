@@ -24,19 +24,6 @@ def extract_image(image_bytes):
     return Image.open(io.BytesIO(image_bytes))
 
 
-def object_detection(content):
-    orig_img = extract_image(content)
-    img_tensor = transform_image(orig_img)
-    detections = prediction(img_tensor)
-    _ = add_bounding_boxes(orig_img, detections)
-    return orig_img
-
-
-def prediction(tensor):
-    out = model([tensor])
-    return out[0]
-
-
 def transform_image(image):
     transform = torchvision.transforms.Compose([
         torchvision.transforms.ToTensor()
@@ -45,7 +32,20 @@ def transform_image(image):
     return transform(image)
 
 
+def predict(tensor):
+    out = model([tensor])
+    return out[0]
+
+
 def add_bounding_boxes(image, detections):
     draw = ImageDraw.Draw(image)
     draw.rectangle(detections['boxes'][0].detach().numpy(), outline='red', width=3)
     return draw
+
+
+def detection(content):
+    img = extract_image(content)
+    img_tensor = transform_image(img)
+    predictions = predict(img_tensor)
+    _ = add_bounding_boxes(img, predictions)
+    return img

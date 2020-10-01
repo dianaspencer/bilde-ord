@@ -40,7 +40,7 @@ def object_detection():
     verified = verify(content)
 
     img_bytes = content.read()
-    img = model.object_detection(img_bytes)
+    img = model.detection(img_bytes)
     output = io.BytesIO()
     img.convert('RGBA').save(output, format='png')
     output.seek(0, 0)
