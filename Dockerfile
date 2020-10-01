@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Assign work directory to set where commands will be run by default
-WORKDIR /app
+WORKDIR /code
 
 # TODO: copy requirements over
 

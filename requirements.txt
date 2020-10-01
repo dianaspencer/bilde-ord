@@ -3,4 +3,5 @@ torchvision
 flask
 pytest
 setuptools
+requests
 typing

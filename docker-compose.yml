@@ -5,7 +5,7 @@ services:
   detection:
     image: vision/detection:latest
     volumes:
-      - ./app:/app
+      - ./bildeord:/code
     ports:
       - '5000:5000'
     # Ensures container to be kept alive and does not exit.
