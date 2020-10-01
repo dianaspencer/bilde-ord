@@ -20,12 +20,12 @@ def create_app(test_config=None, secret_key="dev"):
         MAX_CONTENT_LENGTH=1 * 1024 * 1024
     )
 
-    # Test bildeord connection works
+    # Test bildeord connection
     @app.route("/hello")
     def hello_test():
         return "Hello world!"
 
-    # Register blueprint for detection service
+    # Register blueprint for object detection service
     app.register_blueprint(routes.bp)
 
     return app
