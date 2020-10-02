@@ -6,7 +6,6 @@ from bildeord import model
 from flask import Blueprint
 from flask import render_template
 from flask import current_app as ca
-from flask import jsonify
 
 bp = Blueprint("app", __name__)
 
