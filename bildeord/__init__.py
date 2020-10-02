@@ -1,5 +1,5 @@
 from flask import Flask
-from bildeord import routes
+from bildeord import app
 
 
 def create_app(test_config=None, secret_key="dev"):
@@ -10,10 +10,10 @@ def create_app(test_config=None, secret_key="dev"):
             during development, but override when deploying.
     :return:
     """
-    app = Flask(__name__, instance_relative_config=True)
+    app_ = Flask(__name__, instance_relative_config=True)
 
     # Place all global app configuration settings here.
-    app.config.from_mapping(
+    app_.config.from_mapping(
         SECRET_KEY=secret_key,
         ALLOWED_IMAGE_EXTENSIONS=[".jpg", ".png", ".gif"],
         # Maximum content size is 1 MB
@@ -21,11 +21,11 @@ def create_app(test_config=None, secret_key="dev"):
     )
 
     # Test bildeord connection
-    @app.route("/hello")
+    @app_.route("/hello")
     def hello_test():
         return "Hello world!"
 
     # Register blueprint for object detection service
-    app.register_blueprint(routes.bp)
+    app_.register_blueprint(app.bp)
 
-    return app
+    return app_

@@ -45,7 +45,7 @@ def add_bounding_boxes(image, detections):
 
 def detection(content):
     img = extract_image(content)
-    img_tensor = transform_image(img)
-    predictions = predict(img_tensor)
-    _ = add_bounding_boxes(img, predictions)
+    #img_tensor = transform_image(img)
+    #predictions = predict(img_tensor)
+    #_ = add_bounding_boxes(img, predictions)
     return img
