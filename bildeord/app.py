@@ -26,6 +26,8 @@ def validate(content):
 
     file_split = file_basename.split('.')
     if len(file_split) != 2:
+        # File may be an empty string or does not
+        # obey "filename.extension" convention.
         raise handlers.InvalidFileUpload(
             message="Invalid File Upload.",
             status_code=400
@@ -38,9 +40,6 @@ def validate(content):
             status_code=422
         )
 
-    if content.filename == "":
-        return "Does not have file name"
-
 
 @this_app.route('/', methods=['POST'])
 def object_detection():
@@ -49,7 +48,7 @@ def object_detection():
     # Verify file is an image
     verified = validate(content)
     # Get bytes from file stream
-    img_bytes = content.read()
+    img_bytes = verified.read()
 
     img = model.detection(img_bytes)
 
