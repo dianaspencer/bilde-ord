@@ -2,7 +2,6 @@ import flask
 import io
 import logging
 import os
-import re
 
 from bildeord import model
 from bildeord.error import handlers
