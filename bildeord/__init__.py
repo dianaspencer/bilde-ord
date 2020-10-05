@@ -1,5 +1,6 @@
 from flask import Flask
 from bildeord import app
+from bildeord.error import handlers
 
 
 def create_app(test_config=None, secret_key="dev"):
@@ -15,7 +16,7 @@ def create_app(test_config=None, secret_key="dev"):
     # Place all global app configuration settings here.
     app_.config.from_mapping(
         SECRET_KEY=secret_key,
-        ALLOWED_IMAGE_EXTENSIONS=[".jpg", ".png", ".gif"],
+        ALLOWED_FILE_EXTENSIONS=["jpg", "png"],
         # Maximum content size is 1 MB
         MAX_CONTENT_LENGTH=1 * 1024 * 1024
     )
@@ -26,6 +27,7 @@ def create_app(test_config=None, secret_key="dev"):
         return "Hello world!"
 
     # Register blueprint for object detection service
-    app_.register_blueprint(app.bp)
+    app_.register_blueprint(app.this_app)
+    app_.register_blueprint(handlers.errors)
 
     return app_
