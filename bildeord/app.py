@@ -40,6 +40,8 @@ def validate(content):
             status_code=422
         )
 
+    return content
+
 
 @this_app.route('/', methods=['POST'])
 def object_detection():
