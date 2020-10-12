@@ -19,6 +19,8 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Build Docker image
-      run : make build
-    - name: Start up container
-      run : make start
+      run: make build
+    - name: Start up Docker container
+      run: make start
+    - name: Test with pytest
+      run: pytest
