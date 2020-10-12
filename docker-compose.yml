@@ -3,7 +3,7 @@ version: '2'
 services:
   # Service for vision object detection
   detection:
-    image: vision/detection:latest
+    image: bildeord:latest
     volumes:
       - ./bildeord:/code
     ports:
