@@ -4,4 +4,4 @@
 
 # Bildeord
 
-A Flask application for assisting language learning through words labeled in a picture.
+A Flask application for assisting language learning by reading object names in pictures.
