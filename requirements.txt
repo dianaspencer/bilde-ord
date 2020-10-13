@@ -1,4 +1,5 @@
 torchvision
+flake8
 flask
 pytest
 setuptools
