@@ -1,1 +1,9 @@
-.git
+# Exclude git files and directories 
+.git/
+.dockerignore
+
+# Exclude all environment files
+env/
+
+# Exclude markdown files
+*.md

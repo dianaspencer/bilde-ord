@@ -1,12 +1,35 @@
-version: '2'
+version: "3.8"
 
 services:
-  # Service for vision object detection
-  detection:
-    image: bildeord:latest
+
+  # Nginx HTTP web server
+  web:
+    image: nginx:latest
+    container_name: nginx
     volumes:
-      - ./:/code  # ./bildeord:/code
+      - ./:/www/code
+      - ./config/nginx.conf:/etc/nginx/config.d/default.conf
     ports:
-      - '5000:5000'
-    # Ensures container to be kept alive and does not exit.
-    tty: true
+      - 80:80  # HTTP Protocol port
+    depends_on:
+      - flask
+
+  # App service for model
+  flask:
+    build:
+      context: "."
+      dockerfile: Dockerfile
+    image: bildeord:latest
+    container_name: bildeord
+    # command: make run
+    volumes:
+      - ./:/webapp/code
+    env_file:
+      - ./env/.env.development  # note sure about this too much
+    # networks:
+    #   flask-net:
+    #     aliases:
+    #       - backend
+
+networks:
+  flask-net:
