@@ -1,23 +1,26 @@
 import io
+import os
 import torch
 import torchvision
 
 from PIL import Image
 from PIL import ImageDraw
 
+DEVICE = "cpu"  # FIXME: Collect env var
 torch.manual_seed(1234)
 
-if torch.cuda.is_available():
-    device = torch.device('cuda')
-else:
-    device = torch.device('cpu')
+# Override default pytorch model_dir
+model_dir = os.environ.get('MODEL_DIR')
+if not os.path.exists(model_dir):
+   os.mkdir(model_dir)
+os.environ['TORCH_HOME'] = "./models"  # FIXME: collect env dir
 
-# TODO: determine where and when to load model into memory with
-# setting the correct configuration
-# Load pre-trained model into memory
+# Download pretrained model
 model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=True)
+
+# Model only used for evaluation and not training purposes
 model.eval()
-model.to(device)
+model.to(DEVICE)
 
 
 def extract_image(image_bytes):
