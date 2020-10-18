@@ -127,3 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# TODO: Relocate configuration files
+config/
+logs/
+models/
